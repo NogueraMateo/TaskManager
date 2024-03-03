@@ -1,0 +1,85 @@
+.signup-body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+.signup-container {
+    width: 400px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  
+    background-color: #ffffff;
+}
+  
+.signup-title {
+    text-align: center;
+}
+  
+.signup-h2 {
+    color: hwb(230 53% 0%);
+}
+  
+.signup-input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+  
+.signup-input:focus {
+    outline: #007bff solid 2px;
+  }
+
+.button {
+  margin-top: 20px;
+  width: 35%;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px rgb(143, 142, 142);
+  border: none;
+}
+
+.create-account {
+  background-color: #007bff;
+  color: white;
+}
+  
+.button:hover {
+    opacity: 0.8;
+    transition: 200ms;
+  }
+  
+.signup-button {
+    margin-left: 20px;
+    width: 25%;
+    padding: 10px;
+    border: #0077b5 1px solid;
+    background-color: white;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+.signup-button:hover{
+    color: rgb(4, 4, 4);
+    border-color: black ;
+    transition: 500ms;
+  }
+  
+#register-span {
+    color: gray;
+    font-size: larger;
+  }
+  
+.register-text {
+    margin: 20px 0 20px 0;
+  }
+  
+.button-con {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }

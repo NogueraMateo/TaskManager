@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="statics/dashboard.css"> 
+</head>
+<body class="dash-body">
+    <section class="user-info user">
+        <div class="username">
+            <img src="statics/nophoto.png" alt="user photo" id="user-photo">
+           <span>Username</span>
+        </div>
+
+        <div class="user-info extra">
+            <span>Email</span>
+            <input type="email" name="useremail" id="useremail" disabled value="username@email.com">
+            <span>Password</span>
+            <input type="password" disabled value="falsePassword">
+        </div>
+        <div class="user-info update" >
+            <button id="update-button">Update info</button>
+            <button id="logout">Log out</button>
+        </div>
+        
+    </section> 
+    
+    <main class="dash-main">
+        <header class="dash-head">
+            <h1 class="dash-h1">TASK MANAGER</h1>
+        </header>
+        <div class="list-tasks">
+            <div id="usertasks">
+                <span>Your tasks</span>
+            </div>   
+            <button class="add" id="add-task">+ Add task</button>
+            <div id="formulario" style="display: none;" >
+                <div class="form-container">
+                    <form class="form update">
+                        <label for="titleUpd" class="label form-info">Nombre:</label>
+                        <input maxlength="60" type="text" id="titleUpd" name="title" class="tinput form-info"><br><br>
+                        <label for="description" class="label form-info">Description:</label>
+                        <textarea id="description" name="description" rows="4" cols="40" class="dinput form-info"></textarea>
+                        <footer class="footer-form">
+                            <input type="submit" value="Enviar">
+                        </footer>
+                        <button type="button" onclick="document.getElementById('formulario').style.display='none'">Cancelar</button>
+                    </form>
+                </div>   
+            </div>
+        </div>
+
+        <div id="update-info-form">
+            <div class="form-container-update">
+                <form class="update-userinfo" name="update-userinfo">
+                    <label for="username">Username</label>
+                    <input type="text" value="" id="username">
+                    <label for="email">Email</label>
+                    <input type="email" value="" id="email">
+                    <label for="password">Password</label>
+                    <input type="password" placeholder="New password" id="password" minlength="7">
+                    <footer>
+                        <input type="submit" id="send-userup" value="Send">
+                        <button type="button" onclick="document.getElementById('update-info-form').style.display='none'">Cancel</button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+        
+        <div id="task-menu">
+            <div class="delete-container">
+                <button type="button" id="complete-task">Mark Completed</button>
+                <button type="button" id="delete-task">Delete</button>
+            </div>
+        </div>
+
+        <footer>
+
+        </footer>
+    </main>
+    <script src="/statics/app.js"></script>
+      
+</body>
+</html>

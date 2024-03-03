@@ -1,0 +1,35 @@
+Los joins sirven para unir contenidos de dos tablas diferentes
+
+INNER JOIN 
+
+Este tipo de Join selecciona los registros que tienen valores en común en ambas tablas, su sintaxis es:
+SELECT column_name(s)
+FROM table1
+INNER JOIN table2
+ON table1.column_name = table2.column_name;
+
+LEFT JOIN 
+
+Este tipo de Join selecciona todos los registros de la tabla 1 y los registros que tienen en común de la tabla 2 si 
+es que los hay, en caso de no haber, rellena los faltantes con valores nulos, su sintaxis es:
+
+SELECT column_name(s)
+FROM table1
+LEFT JOIN table2
+ON table1.column_name = table2.column_name;
+
+
+RIGHT JOIN
+
+Este tipo de Join hace lo inverso que hace LEFT JOIN, sin embargo, en sqlite3 no se puede hacer un RIGHT JOIN directamente, 
+pero lo podemos simular simplemente intercambiando las tablas de lugar, es decir, la que antes era la tabla A, pasa a ser la B 
+y la que antes era la tabla B pasa a ser la A
+
+FULL JOIN 
+
+Este tipo de Join sirve para unir filas de la tabla A y la tabla B, en caso de que no existan filas que coincidan se rellenan con 
+valores nulos, sin embargo, en sqlite3 no se puede tampoco realizar un full join directamente, si no que se puede simular. Este full join 
+se simula uniendo los resultados de un LEFT JOIN y una simulación de un RIGHT JOIN, usando en medio de estos dos JOINS, la palabra 
+UNION.
+
+

@@ -1,0 +1,25 @@
+count(), esta función nos sirve para contar el numero de registros que tiene determinada columna de una tabla
+por ejemplo, SELECT count(FirstName) FROM Products, cuenta el numero de registros en la columna FirstName
+
+SUM(), esta función suma todos los valores en una columna específica
+
+AVG(), esta función calcula el promedio de todos los valores en un determinado campo o columna
+
+ROUND(), esta función redondea el valor que se le pase dentro de los paréntesis. Sin embargo, esta función recibe dos parámetros,
+el primer parámetro es el valor a redondear, y el segundo parámetro es la cantidad de decimales que queremos, si no se pasa ninguno
+redondea sin decimales.
+
+MIN(), esta función devuelve el valor minimo que exista en un determinado campo o columna
+
+MAX(), esta función devuelve el valor máximo que exista en un determinado campo o columna
+
+GROUP BY, no es una función pero sirve para agrupar los datos de una consulta con respecto a la columna o campo que 
+le pasemos. Si se va a usar la clausula WHERE en la misma consulta que estamos usando GROUP BY, la clasula WHERE debe ir antes
+de GROUP BY
+
+HAVING, tiene el mismo uso que tiene WHERE, sin embargo, la clausula WHERE sirve para hacer filtrado de registros mientras que la clausula 
+HAVIND se usa para hacer filtrado de grupos. 
+
+Si intentamos usar el WHERE para filtrar cuando hemos usado antes en la misma consulta una función de agregación, no nos va a dejar 
+hacer la consulta
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="statics/signup.css">
+  <title>Sign up</title>
+</head>
+<body class="signup-body">
+
+  <div class="signup-container">
+      <div class="signup-title">
+          <h2 class="signup-h2">TASK MANAGER</h2>
+          <hr>
+      </div>
+      <div class="register-text">
+          <span id="register-span">Register</span>
+      </div>
+    <form name="signup">
+      <input id="username" type="text" class="signup-input" placeholder="Username" required autocomplete="username">
+      <input id="email" type="email" class="signup-input" placeholder="Email Address" required autocomplete="email">
+      <input id="password"  type="password" class="signup-input" placeholder="New password" required minlength="7">
+      <input id="confirm-password"  type="password" class="signup-input" placeholder="Confirm password" required minlength="7">
+      <div id="error-message" style="color: red;"></div>
+      <div class="button-con">
+          <button type="submit" class="create-account button" id="create-account-button">Create account</button>
+          <button type="button" class="goback button" id="goback-button">Go back</button>
+      </div>
+      
+      </div>
+    </form>
+  </div>
+  <script src="/statics/app.js"></script>
+</body>
+</html>
