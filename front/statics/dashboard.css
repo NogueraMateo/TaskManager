@@ -24,13 +24,15 @@
     align-items: center;
     justify-content: center;
     background-color: #66796b;
-    width: 100%;
+    width: 99.9%;
     height: 150px;
 }
     
 .user-info.user {
+    display: flex;
+    flex-direction: column;
     width: 20%;
-    height: 100vh;
+    height: 99vh;
     background-color:#0d2510;
     border: 3px  #6c7e73 solid;
     border-radius: 10px;    
@@ -115,7 +117,7 @@
     
     
 .list-tasks {
-    max-height: 800px; /* Ajusta esto al valor que necesites */
+    max-height: 600px; /* Ajusta esto al valor que necesites */
     overflow-y: auto;
     display: flex;
     justify-content: flex-start;
@@ -128,6 +130,7 @@
     align-self: center;
     padding: 10px 20px;
     background-color: #a6d4b8;
+    word-wrap: break-word;
     width: 80%;
     height: 70px;
     gap: 6px;
@@ -135,9 +138,13 @@
     border-radius: 20px;
     }
 
-p {
+.task p {
     color: rgb(54, 53, 53);
     font-weight: bold;
+    white-space: nowrap;      /* Asegura que el texto se muestre en una sola línea */
+    overflow: hidden;         /* Oculta cualquier contenido que pase del borde del contenedor */
+    text-overflow: ellipsis;  /* Muestra puntos suspensivos al final del texto desbordado */
+      
 }
 
 .task:hover {
@@ -188,8 +195,8 @@ p {
     width: 20%;
     height: 15%;
     transform: translate(-50%, -50%);
-    background-color: rgb(255, 255, 255);
-    border-radius: 5px;
+    background-color: rgb(183 191 188);
+    border-radius: 10px;
     gap: 20px;
 }
 
@@ -221,7 +228,6 @@ p {
     width: 45%;
     height: 60%;
     transform: translate(-50%, -50%);
-    background-color: rgb(178, 207, 192);
     padding: 20px;
     border-radius: 5px;
 }
@@ -245,7 +251,7 @@ p {
 }
 
 .form.update {
-    background-color: rgb(154, 215, 255);
+    background-color: rgb(57 123 167);
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -293,14 +299,15 @@ p {
 
 #send-userup {
     width: 30%;
-    height: 54%;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-radius: 10px;
     background-color:#1c553d ;
     color: rgb(255, 255, 255);
     font-size: 0.8rem;
 }
 
-#send-userup, #complete-task:hover {
+#send-userup:hover, #complete-task:hover {
     background-color:#3dc28a ;
     color: rgb(0, 0, 0);
     font-size: 0.8rem;
@@ -317,11 +324,10 @@ p {
     font-size: 0.8rem;
 }
 
-.update-userinfo button, #delete-task:hover {
+.update-userinfo button:hover, #delete-task:hover {
     transition: 200ms;
     background-color: #ff0000;
 }
-
 
 .update-userinfo footer{
    height: 20%;
@@ -356,7 +362,7 @@ p {
     background-color: rgb(31, 68, 46);
     color: white;
     font-size: 1.7rem;
-    width: 100%;
+    width: 99.5%;
     height: 60px;
     text-align: center;
     display: flex;
@@ -388,3 +394,94 @@ p {
     color: white; 
 }
 
+#user-info-container {
+    display: none;
+}
+
+#close-section {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: larger;
+    margin-top: 30px;
+    display: none;
+}
+
+/* Estilos para pantallas de maximo 600px de ancho*/
+@media screen and (max-width: 600px) {
+    #user-info-container {
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        background-color: #0d2510;
+        width: 100vw;
+        height: 10%;
+    }
+
+    .user-info.user {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        width: 100%; /* o el porcentaje que prefieras */
+        height: 100%;
+        top: 0;
+        left: 0;
+        overflow-y: auto;
+        background-color: rgb(43, 80, 43); /* o cualquier otro color de fondo */
+        z-index: 100;/* Asegúrate de que sea mayor que el resto de elementos */
+    }
+
+    .username {
+        justify-content: center;
+        flex-direction: column;
+    }  
+
+    .user-info.extra {
+        align-items: center;
+    }
+
+    .user-info.extra input {
+        margin-bottom: 20px;
+        width: 60%;
+    }
+
+    .hamburger-menu {
+        display: flex; /* El botón hamburguesa es visible en pantallas pequeñas */
+        background-color: #0d2510;
+        font-size: larger;
+        border: none;
+        color: white;
+        top: 0;
+        left: 0;
+        z-index: 101;
+        justify-self: center;
+        align-self: center; /* Debe estar encima de la sección de usuario cuando esté visible */
+    }
+
+    .update-userinfo {
+        width: 100%;
+    }
+
+    .form-container-update{
+        width: 60%;
+    }
+
+    .form-container {
+        width: 80%;
+    }
+
+    .tinput {
+        font-size: 1rem;
+        height: 20px;
+    }
+
+    .delete-container {
+        width: 70%;
+    }
+}
+
+@media screen and (max-height: 750px) {
+    .form-container-update {
+        height: 55%;
+    }
+}

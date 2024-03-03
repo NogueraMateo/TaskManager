@@ -314,8 +314,23 @@ function setupDashboardEventHandlers(username) {
                 });
             });
         }
+
+        const openSectionButton = document.getElementById('hamburger-menu')
+        openSectionButton.addEventListener('click', function () {
+            document.getElementById('user-section').style.display = 'flex'
+            document.getElementById('close-section').style.display = 'block'
+        })
+
+        window.addEventListener('resize', function() {
+            var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            if (width > 600) {
+              document.getElementById('close-section').style.display = 'none';
+            }
+          });
     }
 }
+
+
 
 function newTaskContainer(task) {
     var newdiv = document.createElement("div")

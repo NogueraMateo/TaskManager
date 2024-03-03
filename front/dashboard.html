@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="statics/dashboard.css"> 
+    <link rel="stylesheet" href="/statics/dashboard.css"> 
 </head>
 <body class="dash-body">
-    <section class="user-info user">
+    <section class="user-info user" id="user-section">
         <div class="username">
             <img src="statics/nophoto.png" alt="user photo" id="user-photo">
            <span>Username</span>
@@ -23,10 +23,14 @@
             <button id="update-button">Update info</button>
             <button id="logout">Log out</button>
         </div>
-        
-    </section> 
+        <button id="close-section" onclick="document.getElementById('user-section').style.display = 'none'">X</button>
+    </section>
+    
     
     <main class="dash-main">
+        <div id="user-info-container">
+            <button class="hamburger-menu" id="hamburger-menu">☰</button>    
+        </div>
         <header class="dash-head">
             <h1 class="dash-h1">TASK MANAGER</h1>
         </header>
@@ -41,7 +45,7 @@
                         <label for="titleUpd" class="label form-info">Nombre:</label>
                         <input maxlength="60" type="text" id="titleUpd" name="title" class="tinput form-info"><br><br>
                         <label for="description" class="label form-info">Description:</label>
-                        <textarea id="description" name="description" rows="4" cols="40" class="dinput form-info"></textarea>
+                        <textarea id="description" name="description" rows="4" cols="40" class="dinput form-info" maxlength="120"></textarea>
                         <footer class="footer-form">
                             <input type="submit" value="Enviar">
                         </footer>
@@ -61,7 +65,7 @@
                     <label for="password">Password</label>
                     <input type="password" placeholder="New password" id="password" minlength="7">
                     <footer>
-                        <input type="submit" id="send-userup" value="Send">
+                        <button type="submit" id="send-userup">Update</button>
                         <button type="button" onclick="document.getElementById('update-info-form').style.display='none'">Cancel</button>
                     </footer>
                 </form>
