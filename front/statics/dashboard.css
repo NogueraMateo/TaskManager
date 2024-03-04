@@ -101,6 +101,8 @@
     
 .username {
     display: flex;
+    flex-direction: column;
+    gap: 10px;
     align-items: center;
     padding: 30px 10px;
     height: 90px;
@@ -434,6 +436,7 @@
     .username {
         justify-content: center;
         flex-direction: column;
+        gap: 0;
     }  
 
     .user-info.extra {

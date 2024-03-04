@@ -115,7 +115,7 @@ function setupSignupEventHandlers() {
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
-                    FromSignuptoLogin('signup-body')
+                    everywhereToLogin('signup-body')
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -324,7 +324,7 @@ function setupDashboardEventHandlers(username) {
         window.addEventListener('resize', function() {
             var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
             if (width > 600) {
-              document.getElementById('close-section').style.display = 'none';
+              document.getElementById('close-section').style.display = 'none';  
             }
           });
     }
