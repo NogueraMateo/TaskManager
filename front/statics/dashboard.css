@@ -211,6 +211,11 @@
     font-size: 0.8rem;
 }
 
+#complete-task:disabled, #complete-task:disabled:hover {
+    background-color: rgb(156, 156, 156);
+    color: white;
+}
+
 #delete-task {
     width: 30%;
     height: 30%;

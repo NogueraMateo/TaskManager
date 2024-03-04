@@ -327,6 +327,7 @@ function setupDashboardEventHandlers(username) {
               document.getElementById('close-section').style.display = 'none';  
             }
           });
+
     }
 }
 
@@ -336,6 +337,10 @@ function newTaskContainer(task) {
     var newdiv = document.createElement("div")
     newdiv.className = "task";
     newdiv.setAttribute('data-task-id', task.id);
+
+    if (task.completed) {
+        newdiv.style.opacity = '0.6';
+    }
 
     var title = document.createElement("p");
     title.textContent = task.title;
@@ -353,12 +358,17 @@ function newTaskContainer(task) {
 
 function addEventToNewTask(div, taskId) {
     div.addEventListener('click', function(event) {
-        event.stopPropagation()
-        showTaskMenu(taskId);
+        event.stopPropagation();
+        
+        if (div.style.opacity === '0.6') {
+            showTaskMenu(taskId, true);
+        } else {
+            showTaskMenu(taskId);
+        }
     });
 }
 
-function showTaskMenu(taskId) {
+function showTaskMenu(taskId, completed = false) {
     let del_container = document.getElementById('task-menu')
     del_container.style.display = 'block';
     
@@ -374,6 +384,44 @@ function showTaskMenu(taskId) {
         deleteTask(taskId);
         del_container.style.display = 'none';
     };
+
+    let markCompletedButton = document.getElementById('complete-task');
+    markCompletedButton.disabled = false;
+    if (completed) {
+        markCompletedButton.disabled = true;
+    }
+    markCompletedButton.onclick = function(event) {
+        event.stopPropagation();
+        markTaskCompleted(taskId);
+        del_container.style.display = 'none'
+    }
+}
+
+function markTaskCompleted(taskId) {
+    fetch(`/tasks/${taskId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type' : 'application/json',
+            'Authorization' : 'Bearer ' + localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+            completed: true
+        }),
+        credentials: 'include'
+    }
+    )
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('No se pudo marcar la tarea como completada')
+        }
+        return response.json()
+    })
+    .then(() => {
+        document.querySelector(`[data-task-id="${taskId}"]`).style.opacity = '0.6';
+    })
+    .catch(error => {
+        console.log(error)
+    });
 }
 
 function deleteTask(taskId) {
@@ -393,6 +441,7 @@ function deleteTask(taskId) {
     .then(() => {
         // Implementar logica para actualizar el DOM
         document.querySelector(`[data-task-id="${taskId}"]`).remove();
+
     })
     .catch(error => {
         console.error('Error al eliminar la tarea', error);
