@@ -258,14 +258,15 @@
 }
 
 .form.update {
-    background-color: rgb(57 123 167);
-    width: 90%;
+    background-color: rgb(63 81 92);
+    width: 60%;
     display: flex;
     flex-direction: column;
-    height: 90%;
+    height: 70%;
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 30px;
+    border-radius: 10px;
 }
 
 .update-userinfo {
@@ -283,6 +284,8 @@
 
 .label {
     margin-bottom: 20px;
+    color: white;
+    font-weight: bolder;
 }
 
 .update-userinfo label {
@@ -304,7 +307,7 @@
     
 }
 
-#send-userup {
+#send-userup, #create-task {
     width: 30%;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -312,15 +315,16 @@
     background-color:#1c553d ;
     color: rgb(255, 255, 255);
     font-size: 0.8rem;
+    font-weight: bold;
 }
 
-#send-userup:hover, #complete-task:hover {
+#send-userup:hover, #complete-task:hover, #create-task:hover {
     background-color:#3dc28a ;
     color: rgb(0, 0, 0);
     font-size: 0.8rem;
 }
 
-.update-userinfo button {
+.update-userinfo button, #cancel-task{
     width: 30%;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -331,7 +335,7 @@
     font-size: 0.8rem;
 }
 
-.update-userinfo button:hover, #delete-task:hover {
+.update-userinfo button:hover, #delete-task:hover, #cancel-task:hover {
     transition: 200ms;
     background-color: #ff0000;
 }
@@ -350,6 +354,7 @@
     font-size: 1.5rem;
     border-radius: 10px;
     padding: 5px 10px;
+    background-color: #9ea5ac;
 }
 
 .dinput {
@@ -357,14 +362,19 @@
     height: 80px;
     font-size: 1rem;
     border-radius: 15px;
+    background-color: #9ea5ac;
+    resize: none;
 }
 
 .footer-form {
+    margin-top: 20px;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    gap: 20px;
 }
-    
+
+
 #usertasks {
     background-color: rgb(31, 68, 46);
     color: white;
@@ -415,7 +425,7 @@
 }
 
 /* Estilos para pantallas de maximo 600px de ancho*/
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 900px) {
     #user-info-container {
         display: flex;
         align-items: center;
@@ -486,10 +496,31 @@
     .delete-container {
         width: 70%;
     }
+
+    .form.update {
+        width: 90%;
+        height: 60%;
 }
 
 @media screen and (max-height: 750px) {
     .form-container-update {
         height: 55%;
+    }
+    .form.update {
+        height: 70%;
+    }
+}}
+
+@media screen and (min-height: 1080px) {
+    .form-container {
+        width: 55%;
+    }
+    .form.update {
+        width: 100%;
+        height: 50%;
+    }
+    .username {
+        margin-top: 30px;
+        margin-bottom: 60px;
     }
 }

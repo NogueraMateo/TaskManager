@@ -47,9 +47,10 @@
                         <label for="description" class="label form-info">Description:</label>
                         <textarea id="description" name="description" rows="4" cols="40" class="dinput form-info" maxlength="120"></textarea>
                         <footer class="footer-form">
-                            <input type="submit" value="Enviar">
+                            <input type="submit" value="Create" id="create-task">
+                            <button type="button" id="cancel-task" onclick="document.getElementById('formulario').style.display='none'">Cancelar</button>
                         </footer>
-                        <button type="button" onclick="document.getElementById('formulario').style.display='none'">Cancelar</button>
+                        
                     </form>
                 </div>   
             </div>
