@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from .. import schemas, models
-from ..database import SessionLocal
+from ..database import SessionLocal, get_db
 import os
 
 load_dotenv()
@@ -18,14 +18,6 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 1
 
-
-# Dependency 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 def authenticate_user(db: Session, username: str, password: str):

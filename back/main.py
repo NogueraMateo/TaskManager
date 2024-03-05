@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 from .routers import tasks_router, users_router, authenticate_users
 from . import  models
-from .database import SessionLocal, engine
+from .database import SessionLocal, engine, get_db
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Annotated
 from fastapi.templating import Jinja2Templates
@@ -36,13 +36,6 @@ app.include_router(users_router.router)
 app.include_router(tasks_router.router)
 app.mount("/statics", StaticFiles(directory="front/statics"), name="statics")
 
-# Dependency 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 @app.get("/", response_class=HTMLResponse)

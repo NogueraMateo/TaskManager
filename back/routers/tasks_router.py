@@ -2,18 +2,11 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from . import authenticate_users as oauth2
 from .. import crud, schemas, models
-from ..database import SessionLocal
+from ..database import SessionLocal, get_db
 
 router = APIRouter(prefix="/tasks",
                    tags=["Tasks"])
 
-# Dependency 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @router.get("/", response_model=list[schemas.Task])
 def read_user_tasks(skip:int = 0, limit:int = 100, db :Session = Depends(get_db), current_user: models.User = Depends(oauth2.get_current_user)):

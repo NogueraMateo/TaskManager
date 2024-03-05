@@ -1,19 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from .. import crud, schemas, models
-from ..database import SessionLocal
+from ..database import SessionLocal, get_db
 from . import authenticate_users as oauth2
 
 router = APIRouter(prefix="/users",
                    tags=["Users"],)
 
-# Dependency 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 @router.post("/", response_model=schemas.User, status_code= 201)
