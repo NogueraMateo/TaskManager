@@ -1,3 +1,7 @@
+/**
+ * Establece los EventHandlers necesarios para el apartado de login, esta función es llamada
+ * cada que se renderiza el apartado de login
+ */
 function setupLoginEventHandlers() {
     const loginForm = document.querySelector("form[name='login']");
     if (loginForm) {
@@ -81,6 +85,11 @@ function setupLoginEventHandlers() {
         }   
 }
 
+
+/**
+ * Establece los EventHandlers necesarios para el apartado de Signup, esta función es llamada
+ * cada vez que el usuario vaya al apartado de Signup
+ */
 function setupSignupEventHandlers() {
 
     const signupForm = document.querySelector("form[name='signup']");
@@ -128,6 +137,7 @@ function setupSignupEventHandlers() {
         });
     }
 
+    // Dirige al apartado de sign up
     const gobackButton = document.getElementById('goback-button');
     if (gobackButton) {
         gobackButton.addEventListener('click', function(){
@@ -136,6 +146,12 @@ function setupSignupEventHandlers() {
     }
 }
 
+
+/**
+ *  Realiza una petición GET a la API y la respuesta que es un HTML la reemplaza dentro del body
+ * @param {*} bodyName nombre de la clase del body correspondiente al apartado en el que esté el usuario. Por ejemplo 
+ * si está en el dashboard el parámetro será dash-body, y será reemplazado por loginBody, ya que tienen estilos diferentes.
+ */
 function everywhereToLogin(bodyName) {
     fetch('/', {
         method:'GET'
@@ -148,10 +164,17 @@ function everywhereToLogin(bodyName) {
     });
 }
 
+
 // Defino la función del manejador fuera del alcance del evento click para que pueda eliminar
 // el event listener previo y agregar uno nuevo
 let formSubmitHandler = null;
 
+
+/**
+ * Establece los EventHandlers correspondientes al apartado del dashboard
+ * @param {*} username Este parámetro se usa para obtener la información del usuario que acaba de iniciar sesión 
+ * para así mostrar la información correspondiente a él.
+ */
 function setupDashboardEventHandlers(username) {
 
     const addTaskButton = document.getElementById('add-task')
@@ -206,7 +229,9 @@ function setupDashboardEventHandlers(username) {
                         });
                     };
                 }
-              
+                
+                // Eliminamos el EventListener anterior para evitar la acumulación de los mismos y 
+                // que se agreguen las tareas multiples veces
                 formElement.removeEventListener('submit', formSubmitHandler);
 
                 formElement.addEventListener('submit', formSubmitHandler)
@@ -224,6 +249,7 @@ function setupDashboardEventHandlers(username) {
             textarea.scrollTop = 0;
           });
 
+
         let usern = document.getElementsByTagName('span');
         usern[0].innerHTML = username;
         fetch(`http://localhost:8000/users/${username}`, {
@@ -231,6 +257,7 @@ function setupDashboardEventHandlers(username) {
         })
         .then(response => response.json())
         .then(data => {
+            // Guardamos los datos del usuario en el localStorage en caso de necesitarlos más adelante
             localStorage.setItem('username', data.username)
             localStorage.setItem('email', data.email)
             localStorage.setItem('id', data.id)
@@ -258,12 +285,15 @@ function setupDashboardEventHandlers(username) {
                 updateForm.style.display = 'none'
             }
         });
-
+        
+        // Elimina el token y dirige al usuario al apartado de login
         document.getElementById('logout').addEventListener('click', () => {
             localStorage.removeItem('token');
             everywhereToLogin('dash-body');
         })
 
+        
+        // Permite al usuario actualizar sus datos
         const formToUpdateUser = document.querySelector("form[name='update-userinfo']");
         if (formToUpdateUser) {
             formToUpdateUser.addEventListener('submit', function(event) {
@@ -303,7 +333,8 @@ function setupDashboardEventHandlers(username) {
                 .then(response => response.json())
                 .then(data => {
                     console.log('message:', data);
-                    // Actualizamos los datos del usuario en el dashboard
+
+                    // Actualizamos los datos del usuario en el dashboard solo si cambiaron
                     if (!knowusername) {
                         usern[0].innerHTML = updatedUsername;
                     }
@@ -327,12 +358,16 @@ function setupDashboardEventHandlers(username) {
               document.getElementById('close-section').style.display = 'none';  
             }
           });
-
     }
 }
 
 
-
+/**
+ * Crea un nuevo contenedor para una tarea dada y renderiza la información de esta
+ * @param {*} task Se espera un json que tenga toda la información sobre la tarea que se va a agregar al 
+ * nuevo contenedor
+ * @returns Retorna el nuevo contenedor que será añadido luego por otra función dentro de su contenedor padre 
+ */
 function newTaskContainer(task) {
     var newdiv = document.createElement("div")
     newdiv.className = "task";
@@ -356,6 +391,14 @@ function newTaskContainer(task) {
     return newdiv;
 }
 
+
+/**
+ * Revisa si el div que representa una tarea, ya ha sido marcada como completada en este caso lo hace 
+ * revisando la opacidad del div que es 0.6 cuando la tarea ha sido marcada como completada, si es así llama
+ * a la función showTaskMenu con un segundo parámetro true, que significa que la tarea ha sido marcada como completada
+ * @param {*} div Un div que contiene información de una tarea del usuario
+ * @param {*} taskId El id de la tarea que contiene el div
+ */
 function addEventToNewTask(div, taskId) {
     div.addEventListener('click', function(event) {
         event.stopPropagation();
@@ -368,6 +411,15 @@ function addEventToNewTask(div, taskId) {
     });
 }
 
+
+/**
+ * Se encarga de mostrar los botones de eliminar o marcar tarea completada además de su funcionamiento. 
+ * Si el segundo parámetro que es opcional es true, deshabilitará el botón de marcar la tarea como completada
+ * @param {*} taskId Id de la tarea que podrá ser eliminada o marcada como completada
+ * @param {*} completed Opcional, si no se pasa es falso por defecto lo que indica que la tarea no ha sido completada,
+ * por lo contrario si es especificada como true, indica que ya ha sido completada y se le aplicará un estilo diferente
+ * para ser distinguida de aquellas que aún no están completadas
+ */
 function showTaskMenu(taskId, completed = false) {
     let del_container = document.getElementById('task-menu')
     del_container.style.display = 'block';
@@ -397,6 +449,12 @@ function showTaskMenu(taskId, completed = false) {
     }
 }
 
+
+/**
+ * Encargada de marcar la tarea como completada en la base de datos realizando una petición PUT que actualiza
+ * la tarea, además aplica una opacidad al div que contiene la tarea marcada como completada
+ * @param {*} taskId Id necesario para actualizar la tarea por su id único y no actualizar una no deseada
+ */
 function markTaskCompleted(taskId) {
     fetch(`/tasks/${taskId}`, {
         method: 'PUT',
@@ -424,6 +482,11 @@ function markTaskCompleted(taskId) {
     });
 }
 
+
+/**
+ * Encargada de eliminar la tarea de la base de datos realizando una petición DELETE
+ * @param {*} taskId Id necesario para eliminar la tarea por su id único y no una no deseada 
+ */
 function deleteTask(taskId) {
     fetch(`/tasks/${taskId}`, {
         method: 'DELETE',
@@ -448,8 +511,15 @@ function deleteTask(taskId) {
     });
 }
 
+
+/**
+ * Cada que se recarga la página, antes de cargar de una el apartado de login, revisa si hay un token en el 
+ * localStorage, si lo hay, verifica que sea válido a través de un GET al servidor. De ser válido el token
+ * cargará el dashboard del usuario correspondiente al token almacenado. De no haber token o si este no es 
+ * válido o ha expirado, el usuario será dirigido al apartado de login. Esto se hace en busca de mantener la
+ * sesión del usuario iniciada mientras el token sea válido.
+ */
 document.addEventListener('DOMContentLoaded', function() {
-    // Obtiene el token almacenado en el localStorage si lo hay
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
     if (token) {
