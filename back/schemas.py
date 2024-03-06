@@ -24,8 +24,8 @@ class Task(TaskBase):
     date_of_creation : datetime
     completed : bool = False
 
-    class Config:
-        orm_mode = True
+    class ConfigDict:
+        from_attributes = True
 
 
 # Before creating the user we don't know the id
@@ -50,8 +50,8 @@ class User(UserBase):
     username: str
     tasks : list[Task] = []
 
-    class Config:
-        orm_mode = True
+    class ConfigDict:
+        from_attributes = True
 
 
 class TokenData(BaseModel):

@@ -5,7 +5,6 @@ from .routers import tasks_router, users_router, authenticate_users
 from . import  models
 from .database import SessionLocal, engine, get_db
 from fastapi.middleware.cors import CORSMiddleware
-from typing import Annotated
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 # Run server "uvicorn back.main:app --reload"

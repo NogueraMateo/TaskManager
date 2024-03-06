@@ -121,13 +121,18 @@ function setupSignupEventHandlers() {
                         password: password
                     }),
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok){
+                        throw new Error("Creación de usuario fallida")
+                    }
+                    return response.json()
+                })
                 .then(data => {
                     console.log('Success:', data);
                     everywhereToLogin('signup-body')
                 })
                 .catch((error) => {
-                    console.error('Error:', error);
+                    console.error(error);
                     // Aquí puedes manejar errores de la petición, como mostrar un mensaje al usuario.
                 });
     
