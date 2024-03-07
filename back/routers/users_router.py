@@ -90,6 +90,10 @@ def update_user(
     
     updated_user = crud.update_user(user_id=user_id, user_update=user_update, db=db)
 
-    if updated_user is None:
-        raise HTTPException(status_code=400, detail='Email alredy registered')
+    if updated_user == "username":
+        raise HTTPException(status_code=400, detail='Username in use, please pick another username')
+    
+    if updated_user == "email":
+        raise HTTPException(status_code=400, detail='Email alredy registered, please use a different one')
+    
     return updated_user

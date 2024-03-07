@@ -1,7 +1,5 @@
-from .test_database import db_session,client_with_db_override
+from .fake_database import db_session,client_with_db_override
 import pytest
-
-
 
 def test_user_creation_and_login(client_with_db_override):
     client = client_with_db_override

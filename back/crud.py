@@ -107,7 +107,12 @@ def update_user(db: Session, user_id: int, user_update:schemas.UserUpdate):
     existsemail = get_user_by_email(db=db, user_email=user_update.email)
 
     if existsemail:
-        return None
+        return "email"
+    
+    existsusername = get_user_by_username(db=db, username=user_update.username)
+    
+    if existsusername:
+        return "username"
     
     update_data = user_update.model_dump(exclude_unset=True)
 
