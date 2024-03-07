@@ -194,7 +194,11 @@ function setupDashboardEventHandlers(username) {
                 formSubmitHandler = function(event) {
                     event.preventDefault();
                     fetch(`http://localhost:8000/users/${username}` , {
-                        method : 'GET' // Necesitamos obtener el id del usuario para agregar su tarea
+                        method : 'GET',
+                        headers: {
+                            "Authorization" : "Bearer " + localStorage.getItem('token')
+                        },
+                        credentials: "include" // Necesitamos obtener el id del usuario para agregar su tarea
                     })
                     .then(response => response.json())
                     .then(userData => {
@@ -258,7 +262,11 @@ function setupDashboardEventHandlers(username) {
         let usern = document.getElementsByTagName('span');
         usern[0].innerHTML = username;
         fetch(`http://localhost:8000/users/${username}`, {
-            method : 'GET'
+            method : 'GET',
+            headers: {
+                "Authorization" : "Bearer " + localStorage.getItem('token')
+            },
+            credentials: "include"
         })
         .then(response => response.json())
         .then(data => {

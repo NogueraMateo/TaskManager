@@ -19,6 +19,13 @@ def create_user(user: schemas.UserCreate, db: Session= Depends(get_db)):
         raise HTTPException(status_code=400, detail="Email alredy registered")
     elif db_user_usname:
         raise HTTPException(status_code=400, detail="Username alredy registered")
+    
+    if len(user.password) < 7 :
+        raise HTTPException(status_code=400, detail="Password should be at least 7 characters")
+    
+    if len(user.username) < 5:
+        raise HTTPException(status_code=400, detail="Username should be at least 5 characters")
+    
     return crud.create_user(db=db, user=user)
 
 
@@ -29,7 +36,9 @@ def read_users(skip:int = 0, limit:int= 100, db: Session= Depends(get_db)):
 
 
 @router.get("/{username}", response_model=schemas.User)
-def read_user(username: str, db: Session = Depends(get_db)):
+def read_user(username: str, db: Session = Depends(get_db), current_user : models.User = Depends(oauth2.get_current_user)):
+    if current_user.username != username:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized to read this user")
     db_user = crud.get_user_by_username(db=db, username=username)
     if db_user is None:
         raise HTTPException(status_code=404, detail='User not found')
